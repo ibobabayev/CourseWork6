@@ -1,0 +1,48 @@
+{% extends 'services/base.html' %}
+{% load static %}
+
+<!DOCTYPE html>
+{% block icon %}
+    <title>Список писем</title>
+{% endblock %}
+
+</head>
+<body>
+
+{% block content %}
+    <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+        <h1 class="display-4">SkyService</h1>
+        <p class="lead">Добро пожаловать ^_^</p>
+    </div>
+
+  <main>
+    {% for newsletter in newsletter_list %}
+        <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+          <div class="col">
+            <div class="card mb-4 rounded-3 shadow-sm">
+              <div class="card-header py-3">
+                <h4 class="my-0 fw-normal">Время рассылки: {{ newsletter.start_time }} - {{ newsletter.end_time }} </h4>
+              </div>
+              <div class="card-body">
+                <ul class="list-unstyled mt-3 mb-4">
+                  <li>Периодичность: {{ newsletter.periodicity }}</li>
+                  <li>Статус: {{ newsletter.status }}</li>
+                  <li>Тема письма: {{ newsletter.message }}</li>
+                </ul>
+                <a type="button" href="{% url 'services:view_newsletter' newsletter.pk %}" class="w-100 btn btn-lg btn-primary">Информация</a>
+                <a type="button" href="{% url 'services:edit_newsletter' newsletter.pk %}" class="w-100 btn btn-lg btn-primary">Изменить</a>
+                <a type="button" href="{% url 'services:delete_newsletter' newsletter.pk %}" class="w-100 btn btn-lg btn-primary">Удалить</a>
+              </div>
+            </div>
+          </div>
+        </div>
+    {% endfor %}
+  </main>
+   <div class="col-12 mb-5">
+      <a href="{% url 'services:create_newsletter' %}" class="btn btn-outline-primary">Добавить Рассылку</a>
+   </div>
+{% endblock %}
+
+
+</body>
+</html>

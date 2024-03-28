@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView,UpdateView,ListView,DetailView,DeleteView,TemplateView
-from services.models import Client,Message,Newsletter,Logs
+from services.models import Client,Message,Newsletter
 from services.forms import ClientForm, MessageForm, NewsletterForm
 
 
@@ -91,9 +91,3 @@ class NewsletterDeleteView(DeleteView):
     model = Newsletter
     success_url = reverse_lazy('services:list_newsletter')
 
-
-class LogsListView(ListView):
-    model = Logs
-
-    def get_context_data(self, *, object_list=None, **kwargs):
-        pass

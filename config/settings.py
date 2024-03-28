@@ -144,8 +144,8 @@ EMAIL_PORT = 587
 
 
 CRONJOBS = [
-    ('*/1 * * * *', 'services.cron.my_scheduled_job'),
+    ('*/1 * * * *', 'services.cron.send_email'),
 ]
-# daily ('* */24 * * *', 'services.cron.send_mail'),
+# daily ('* */23 * * *', 'services.cron.send_mail'),
 # weekly ('0 0 * * 0', 'services.cron.send_mail'),
 # monthly ('0 0 1 * *', 'services.cron.send_mail'),

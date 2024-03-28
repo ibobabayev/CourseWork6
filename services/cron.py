@@ -5,6 +5,7 @@ from services.models import Client,Message
 
 # def my_scheduled_job():
 #     Client.objects.create(email='jack@mail.com',fio='jack logan',comment='bro')
+
 def send_email():
     clients = Client.objects.all()
     clients_email = []

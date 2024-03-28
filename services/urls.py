@@ -1,6 +1,6 @@
 from django.urls import path
 from services.apps import ServicesConfig
-from services.views import Homepage
+from services.views import Homepage,ContactTemplateView
 from services.views import ClientCreateView,ClientListView,ClientDetailView,ClientUpdateView,ClientDeleteView
 from services.views import MessageCreateView,MessageListView,MessageDetailView,MessageUpdateView,MessageDeleteView
 from services.views import NewsletterCreateView,NewsletterUpdateView,NewsletterListView,NewsletterDetailView,NewsletterDeleteView
@@ -9,7 +9,8 @@ app_name = ServicesConfig.name
 
 
 urlpatterns = [
-    path('',Homepage.as_view(),name='home'),
+    path('',ContactTemplateView.as_view(),name='contacts'),
+    path('contacts/',Homepage.as_view(),name='home'),
 
     path('client_list/',ClientListView.as_view(),name='client_list'),
     path('create_client/',ClientCreateView.as_view(),name='create_client'),

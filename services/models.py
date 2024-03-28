@@ -72,3 +72,16 @@ class Logs(models.Model):
     class Meta:
         verbose_name = 'Лог'
         verbose_name_plural = 'Логи'
+
+
+class Contact(models.Model):
+    name = models.CharField(max_length=50,verbose_name='Имя')
+    number = models.TextField(verbose_name='Номер телефона')
+    email = models.EmailField(verbose_name='Email')
+
+    def __str__(self):
+        return f'{self.name} {self.number}'
+
+    class Meta:
+        verbose_name = "Контакт"
+        verbose_name_plural = "Контакты"

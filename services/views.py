@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView,UpdateView,ListView,DetailView,DeleteView,TemplateView
-from services.models import Client,Message,Newsletter
+from services.models import Client, Message, Newsletter, Contact
 from services.forms import ClientForm, MessageForm, NewsletterForm
 
 
@@ -91,3 +91,18 @@ class NewsletterDeleteView(DeleteView):
     model = Newsletter
     success_url = reverse_lazy('services:list_newsletter')
 
+class ContactTemplateView(TemplateView):
+    template_name = 'services/contacts.html'
+
+    def get_context_data(self, **kwargs):
+        context_data = super().get_context_data(**kwargs)
+        contact_info = Contact.objects.all()
+        context_data['contact_book'] = contact_info
+        return context_data
+
+    def post(self,request):
+        name = request.POST.get('name')
+        phone = request.POST.get('phone')
+        message = request.POST.get('message')
+        print(f'Имя:{name} , номер телефона:{phone} , сообщение: {message}')
+        return render(request,self.template_name)

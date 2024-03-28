@@ -24,10 +24,10 @@ def send_email():
             from_email=settings.EMAIL_HOST_USER,
             recipient_list=[clients_email],
             )
-    #
+
     # send_mail(
     #     subject='subject',
     #     message='body',
     #     from_email=settings.EMAIL_HOST_USER,
-    #     recipient_list='ibish_acmilan@mail.ru',
+    #     recipient_list=['ibish_acmilan@mail.ru'],
     # )

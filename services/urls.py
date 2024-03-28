@@ -9,8 +9,8 @@ app_name = ServicesConfig.name
 
 
 urlpatterns = [
-    path('',ContactTemplateView.as_view(),name='contacts'),
-    path('contacts/',Homepage.as_view(),name='home'),
+    path('',Homepage.as_view(),name='home'),
+    path('contacts/',ContactTemplateView.as_view(),name='contacts'),
 
     path('client_list/',ClientListView.as_view(),name='client_list'),
     path('create_client/',ClientCreateView.as_view(),name='create_client'),

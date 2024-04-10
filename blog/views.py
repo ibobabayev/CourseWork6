@@ -8,7 +8,7 @@ from django.views.generic import CreateView, UpdateView , ListView , DetailView 
 
 class BlogCreateView(LoginRequiredMixin,CreateView):
     model = Blog
-    fields = ('title','description','image','published_date',)
+    fields = ('title','description','image',)
     success_url = reverse_lazy('blog:blogs_list')
     login_url = "users:login"
 

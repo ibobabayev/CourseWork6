@@ -1,6 +1,5 @@
 {% load static %}
 
-<!doctype html>
 <html lang="en" data-bs-theme="auto">
   <head><script src="{% static 'js/color-modes.js' %}"></script>
     <title>SkyService</title>
@@ -42,7 +41,25 @@
       <a href="{% url 'services:list_message' %}" class="btn btn-outline-primary">Список сообщений</a>
       <a href="{% url 'services:list_newsletter' %}" class="btn btn-outline-primary">Список рассылок</a>
     </div>
-
+    <div class="card-body">
+      <caption><h2>Записи в блогах</h2></caption>
+      <table class="table table-striped">
+        {% for article in filtred_list %}
+          <tr>
+            <th>Название блога</th>
+            <th>Описание блога</th>
+            <th>Дата публикации</th>
+            <th>Ссылка на блог</th>
+          </tr>
+          <tr>
+              <td>{{ article.title }}</td>
+              <td>{{ article.description }}</td>
+              <td>{{ article.published_date }}</td>
+              <td><a href='{% url "blog:view" article.pk %}'> Перейти к блогу</a></td>
+          </tr>
+         {% endfor %}
+      </table>
+    </div>
   {% endblock  %}
 
 

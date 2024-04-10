@@ -3,13 +3,16 @@ from django.http import Http404
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView,UpdateView,ListView,DetailView,DeleteView,TemplateView
+
+from blog.models import Blog
 from services.models import Client, Message, Newsletter, Contact, Logs
 from services.forms import ClientForm, MessageForm, NewsletterForm
 
 
 class Homepage(TemplateView):
     template_name = 'services/base.html'
-    extra_context = {'title':'SkyService'}
+    random_article = Blog.objects.order_by('?')[:3]
+    extra_context = {'title':'SkyService','filtred_list': random_article}
 
 class ClientCreateView(LoginRequiredMixin,CreateView):
     model = Client
@@ -129,8 +132,8 @@ class NewsletterListView(ListView):
     def get_context_data(self, *args, **kwargs):
         context_data = super().get_context_data(*args, **kwargs)
         context_data['newsletter_list'] = Newsletter.objects.all()
-        unique_clients = Client.objects.filter(email = ?)
-        context_data['clients'] = Newsletter.objects.filter(unique_clients)
+        unique_clients = Client.objects.all().count()
+        context_data['clients'] = unique_clients
         return context_data
 
     def get_queryset(self):

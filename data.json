@@ -1,0 +1,212 @@
+[
+  {
+    "model": "services.client",
+    "pk": 1,
+    "fields": {
+      "email": "paul@mail.com",
+      "fio": "paul",
+      "comment": "comment paul"
+    }
+  },
+  {
+    "model": "services.client",
+    "pk": 2,
+    "fields": {
+      "email": "test@mail.com",
+      "fio": "test",
+      "comment": "comment"
+    }
+  },
+  {
+    "model": "services.client",
+    "pk": 4,
+    "fields": {
+      "email": "ibish_acmilan@mail.ru",
+      "fio": "ibo babayev",
+      "comment": "Рад присоединиться к вам!"
+    }
+  },
+  {
+    "model": "services.message",
+    "pk": 1,
+    "fields": {
+      "subject": "Test",
+      "body": "Testt1"
+    }
+  },
+  {
+    "model": "services.message",
+    "pk": 3,
+    "fields": {
+      "subject": "ПРИВЕТСТВИЕ!",
+      "body": "Добро пожаловать!!"
+    }
+  },
+  {
+    "model": "services.newsletter",
+    "pk": 3,
+    "fields": {
+      "start_time": "2025-06-25T00:00:00Z",
+      "end_time": "2024-04-27T00:00:00Z",
+      "periodicity": "раз в день",
+      "status": "создана",
+      "message": 1,
+      "client": [
+        4
+      ]
+    }
+  },
+  {
+    "model": "services.newsletter",
+    "pk": 5,
+    "fields": {
+      "start_time": "2026-04-30T00:00:00Z",
+      "end_time": "2024-10-12T00:00:00Z",
+      "periodicity": "раз в день",
+      "status": "создана",
+      "message": 1,
+      "client": []
+    }
+  },
+  {
+    "model": "services.logs",
+    "pk": 39,
+    "fields": {
+      "attempt": true,
+      "attempt_time": "2024-04-02T19:25:02.313Z",
+      "response": "Рассылка успешно отправлена",
+      "newsletter": 3,
+      "client": 4
+    }
+  },
+  {
+    "model": "services.logs",
+    "pk": 40,
+    "fields": {
+      "attempt": true,
+      "attempt_time": "2024-04-02T19:25:02.313Z",
+      "response": "Рассылка успешно отправлена",
+      "newsletter": 3,
+      "client": 4
+    }
+  },
+  {
+    "model": "services.logs",
+    "pk": 41,
+    "fields": {
+      "attempt": true,
+      "attempt_time": "2024-04-02T19:25:04.508Z",
+      "response": "Рассылка успешно отправлена",
+      "newsletter": 3,
+      "client": 4
+    }
+  },
+  {
+    "model": "services.logs",
+    "pk": 42,
+    "fields": {
+      "attempt": true,
+      "attempt_time": "2024-04-02T19:25:04.508Z",
+      "response": "Рассылка успешно отправлена",
+      "newsletter": 3,
+      "client": 4
+    }
+  },
+  {
+    "model": "services.logs",
+    "pk": 43,
+    "fields": {
+      "attempt": true,
+      "attempt_time": "2024-04-02T19:26:02.256Z",
+      "response": "Рассылка успешно отправлена",
+      "newsletter": 3,
+      "client": 4
+    }
+  },
+  {
+    "model": "services.logs",
+    "pk": 44,
+    "fields": {
+      "attempt": true,
+      "attempt_time": "2024-04-02T19:26:02.256Z",
+      "response": "Рассылка успешно отправлена",
+      "newsletter": 3,
+      "client": 4
+    }
+  },
+  {
+    "model": "services.logs",
+    "pk": 45,
+    "fields": {
+      "attempt": true,
+      "attempt_time": "2024-04-02T19:50:59.123Z",
+      "response": "Рассылка успешно отправлена",
+      "newsletter": 3,
+      "client": 4
+    }
+  },
+  {
+    "model": "services.logs",
+    "pk": 46,
+    "fields": {
+      "attempt": true,
+      "attempt_time": "2024-04-02T19:50:59.123Z",
+      "response": "Рассылка успешно отправлена",
+      "newsletter": 3,
+      "client": 4
+    }
+  },
+  {
+    "model": "services.logs",
+    "pk": 47,
+    "fields": {
+      "attempt": true,
+      "attempt_time": "2024-04-02T19:51:02.380Z",
+      "response": "Рассылка успешно отправлена",
+      "newsletter": 3,
+      "client": 4
+    }
+  },
+  {
+    "model": "services.logs",
+    "pk": 48,
+    "fields": {
+      "attempt": true,
+      "attempt_time": "2024-04-02T19:51:02.380Z",
+      "response": "Рассылка успешно отправлена",
+      "newsletter": 3,
+      "client": 4
+    }
+  },
+  {
+    "model": "services.logs",
+    "pk": 49,
+    "fields": {
+      "attempt": true,
+      "attempt_time": "2024-04-02T19:51:27.742Z",
+      "response": "Рассылка успешно отправлена",
+      "newsletter": 3,
+      "client": 4
+    }
+  },
+  {
+    "model": "services.logs",
+    "pk": 50,
+    "fields": {
+      "attempt": true,
+      "attempt_time": "2024-04-02T19:51:27.742Z",
+      "response": "Рассылка успешно отправлена",
+      "newsletter": 3,
+      "client": 4
+    }
+  },
+  {
+    "model": "services.contact",
+    "pk": 1,
+    "fields": {
+      "name": "",
+      "number": "+90-551-312-27-98",
+      "email": "skyservice@mail.com"
+    }
+  }
+]

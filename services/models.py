@@ -1,11 +1,13 @@
 from django.db import models
+from django.conf import settings
 
 NULLABLE = {'null': True, 'blank': True}
 
 class Client(models.Model):
-    email = models.EmailField(verbose_name='почта')
+    email = models.EmailField(verbose_name='почта',unique=True)
     fio = models.CharField(max_length=70,verbose_name='ФИО')
     comment = models.TextField(verbose_name='комментарий',**NULLABLE)
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.SET_NULL,verbose_name='владелец',**NULLABLE)
 
     def __str__(self):
         return f'ФИО: {self.fio}, почта: {self.email}'
@@ -18,6 +20,7 @@ class Client(models.Model):
 class Message(models.Model):
     subject = models.CharField(max_length=30,verbose_name='тема письма')
     body = models.TextField(verbose_name='тело письма')
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.SET_NULL,verbose_name='владелец',**NULLABLE)
 
     def __str__(self):
         return f'{self.subject}'
@@ -50,12 +53,19 @@ class Newsletter(models.Model):
     client = models.ManyToManyField(Client,verbose_name='клиент',**NULLABLE)
     message = models.ForeignKey(Message,verbose_name='сообщение',on_delete=models.CASCADE,**NULLABLE)
 
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.SET_NULL,verbose_name='владелец',**NULLABLE)
+
+
     def __str__(self):
         return f'Время: {self.start_time} - {self.end_time}, статус рассылки: {self.status}, периодичность рассылки: {self.periodicity}'
 
     class Meta:
         verbose_name = 'Рассылка'
         verbose_name_plural = 'Рассылки'
+
+        permissions = [
+            ('change_status', 'Can change newsletters status'),
+        ]
 
 
 class Logs(models.Model):

@@ -27,8 +27,12 @@
                 {% endfor %}
             </div>
             <div class="card-footer">
-              <a class="btn btn-link" href="{% url 'services:edit_newsletter' newsletter.pk%}">Изменить</a>
-              <a class="btn btn-link" href="{% url 'services:delete_newsletter' newsletter.pk%}">Удалить</a>
+              {% if perms.services.change_newsletter or user.is_superuser %}
+                <a class="btn btn-link" href="{% url 'services:edit_newsletter' newsletter.pk%}">Изменить</a>
+              {% endif %}
+              {% if user.is_superuser or newsletter.owner == request.user %}
+                <a class="btn btn-link" href="{% url 'services:delete_newsletter' newsletter.pk%}">Удалить</a>
+              {% endif %}
             </div>
           </div>
         </div>

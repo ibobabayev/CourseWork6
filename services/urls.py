@@ -4,6 +4,7 @@ from services.views import Homepage,ContactTemplateView
 from services.views import ClientCreateView,ClientListView,ClientDetailView,ClientUpdateView,ClientDeleteView
 from services.views import MessageCreateView,MessageListView,MessageDetailView,MessageUpdateView,MessageDeleteView
 from services.views import NewsletterCreateView,NewsletterUpdateView,NewsletterListView,NewsletterDetailView,NewsletterDeleteView
+from services.views import LogsListView
 
 app_name = ServicesConfig.name
 
@@ -29,4 +30,6 @@ urlpatterns = [
     path('newsletter/list',NewsletterListView.as_view(),name='list_newsletter'),
     path('newsletter/view/<int:pk>',NewsletterDetailView.as_view(),name='view_newsletter'),
     path('newsletter/delete/<int:pk>',NewsletterDeleteView.as_view(),name='delete_newsletter'),
+
+    path('logs/',LogsListView.as_view(),name='logs_list'),
 ]

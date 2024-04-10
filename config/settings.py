@@ -42,7 +42,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'services',
-    'django_crontab'
+    'django_crontab',
+    'users',
+    'blog'
 ]
 
 MIDDLEWARE = [
@@ -144,8 +146,13 @@ EMAIL_HOST_PASSWORD = os.getenv('PASSWORD')
 EMAIL_PORT = 587
 
 CRONJOBS = [
-    ('*/1 * * * *', 'services.cron.send_email'),
+    ('* * * * *', 'services.cron.send_email'), #Почему работает только каждую минуту?
 ]
 # daily ('* */23 * * *', 'services.cron.send_mail'),
 # weekly ('0 0 * * 0', 'services.cron.send_mail'),
 # monthly ('0 0 1 * *', 'services.cron.send_mail'),
+
+AUTH_USER_MODEL = 'users.User'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
+LOGIN_URL = 'users:login'

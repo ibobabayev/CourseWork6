@@ -28,8 +28,12 @@
                   <li>Тело письма: {{ message.body }}</li>
                 </ul>
                 <a type="button" href="{% url 'services:view_message' message.pk%}" class="w-100 btn btn-lg btn-primary">Информация</a>
-                <a type="button" href="{% url 'services:edit_message' message.pk%}" class="w-100 btn btn-lg btn-primary">Изменить</a>
-                <a type="button" href="{% url 'services:delete_message' message.pk%}" class="w-100 btn btn-lg btn-primary">Удалить</a>
+                {% if perms.services.change_message or user.is_superuser %}
+                    <a type="button" href="{% url 'services:edit_message' message.pk%}" class="w-100 btn btn-lg btn-primary">Изменить</a>
+                {% endif %}
+                {% if user.is_superuser or newsletter.owner == request.user %}
+                    <a type="button" href="{% url 'services:delete_message' message.pk%}" class="w-100 btn btn-lg btn-primary">Удалить</a>
+                {% endif %}
               </div>
             </div>
           </div>

@@ -5,12 +5,13 @@ from services.views import ClientCreateView,ClientListView,ClientDetailView,Clie
 from services.views import MessageCreateView,MessageListView,MessageDetailView,MessageUpdateView,MessageDeleteView
 from services.views import NewsletterCreateView,NewsletterUpdateView,NewsletterListView,NewsletterDetailView,NewsletterDeleteView
 from services.views import LogsListView
+from django.views.decorators.cache import cache_page
 
 app_name = ServicesConfig.name
 
 
 urlpatterns = [
-    path('',Homepage.as_view(),name='home'),
+    path('',cache_page(60)(Homepage.as_view()),name='home'),
     path('contacts/',ContactTemplateView.as_view(),name='contacts'),
 
     path('client_list/',ClientListView.as_view(),name='client_list'),

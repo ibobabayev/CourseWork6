@@ -137,22 +137,31 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-load_dotenv()
+load_dotenv(BASE_DIR / '.env')
 
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.mail.ru'
-EMAIL_HOST_USER = 'ibish_acmilan@mail.ru'
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.getenv('PASSWORD')
 EMAIL_PORT = 587
 
 CRONJOBS = [
-    ('* * * * *', 'services.cron.send_email'), #Почему работает только каждую минуту?
+    ('0 0 * * *', 'services.cron.send_email'), #Почему работает только каждую минуту?
 ]
-# daily ('* */23 * * *', 'services.cron.send_mail'),
-# weekly ('0 0 * * 0', 'services.cron.send_mail'),
-# monthly ('0 0 1 * *', 'services.cron.send_mail'),
 
 AUTH_USER_MODEL = 'users.User'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 LOGIN_URL = 'users:login'
+
+
+CACHE_ENABLED =  os.getenv('CACHE_ENABLED')
+
+if CACHE_ENABLED:
+    CACHES = {
+        "default": {
+            "BACKEND": "django.core.cache.backends.redis.RedisCache",
+            "LOCATION": os.getenv('CACHE_LOCATION'),
+            "TIMEOUT": 300
+        }
+    }

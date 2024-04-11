@@ -7,12 +7,13 @@ from django.views.generic import CreateView,UpdateView,ListView,DetailView,Delet
 from blog.models import Blog
 from services.models import Client, Message, Newsletter, Contact, Logs
 from services.forms import ClientForm, MessageForm, NewsletterForm
+from services.services import homepage_cache
 
 
 class Homepage(TemplateView):
     template_name = 'services/base.html'
-    random_article = Blog.objects.order_by('?')[:3]
-    extra_context = {'title':'SkyService','filtred_list': random_article}
+    # random_article = Blog.objects.order_by('?')[:3]
+    extra_context = {'title':'SkyService','filtred_list': homepage_cache()}
 
 class ClientCreateView(LoginRequiredMixin,CreateView):
     model = Client

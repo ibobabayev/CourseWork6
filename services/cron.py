@@ -30,7 +30,6 @@ def send_email():
 
 
     for newsletter in newsletters:
-        # Очень много if-elif. Надо подумать, как правильно сделать!
         if newsletter.start_time < now < newsletter.end_time :
             for i in range(len(message_subject)):
                 newsletter.status = 'запущена'
@@ -52,17 +51,17 @@ def send_email():
                     for client in newsletter.client.all():
                         (Logs.objects.create(attempt=attempt,attempt_time=now,response=response,newsletter=newsletter,client=client)).save()
 
+                if newsletter.periodicity == 'раз в день':
+                    newsletter.start_time += timedelta(days=1, hours=0, minutes=0)
+                elif newsletter.periodicity == 'раз в неделю':
+                    newsletter.start_time += timedelta(days=7, hours=0, minutes=0)
+                elif newsletter.periodicity == 'раз в месяц':
+                    newsletter.start_time += timedelta(days=30, hours=0, minutes=0)
+
         elif now > newsletter.end_time:
             newsletter.status = 'завершена'
 
         elif now < newsletter.start_time :
             newsletter.status = 'создана'
-
-        if newsletter.periodicity == 'раз в день':
-            newsletter.start_time += timedelta(days=1,hours=0,minutes=0)
-        elif newsletter.periodicity == 'раз в неделю':
-            newsletter.start_time += timedelta(days=7,hours=0,minutes=0)
-        elif newsletter.periodicity == 'раз в месяц':
-            newsletter.start_time += timedelta(days=30,hours=0,minutes=0)
 
         newsletter.save()

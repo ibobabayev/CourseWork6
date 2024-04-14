@@ -73,8 +73,8 @@ class Logs(models.Model):
     attempt_time = models.DateTimeField(verbose_name='дата и время последней попытки')
     response = models.CharField(max_length=100,verbose_name='ответ почтового сервера',**NULLABLE)
 
-    newsletter = models.ForeignKey(Newsletter,verbose_name='рассылка',on_delete=models.CASCADE)
-    client = models.ForeignKey(Client,verbose_name='клиент',on_delete=models.CASCADE)
+    newsletter = models.ForeignKey(Newsletter,verbose_name='рассылка',null=True,on_delete=models.SET_NULL)
+    client = models.ForeignKey(Client,verbose_name='клиент',null=True,on_delete=models.SET_NULL)
 
     def __str__(self):
         return f'статус попытки: {self.attempt}, дата и время последней попытки: {self.attempt_time},ответ почтового сервера: {self.response}'

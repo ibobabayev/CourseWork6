@@ -18,6 +18,7 @@
 
   <main>
     {% for newsletter in newsletter_list %}
+      {% if user.is_superuser or newsletter.owner == request.user or perms.services.view_newsletter%}
         <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
           <div class="col">
             <div class="card mb-4 rounded-3 shadow-sm">
@@ -31,15 +32,16 @@
                   <li>Тема письма: {{ newsletter.message }}</li>
                 </ul>
                 <a type="button" href="{% url 'services:view_newsletter' newsletter.pk %}" class="w-100 btn btn-lg btn-primary">Информация</a>
-                {% if perms.services.change_newsletter or user.is_superuser %}
+                {% if newsletter.owner == request.user or user.is_superuser or perms.services.change_newsletter %}
                     <a type="button" href="{% url 'services:edit_newsletter' newsletter.pk %}" class="w-100 btn btn-lg btn-primary">Изменить</a>
                 {% endif %}
-                {% if user.is_superuser or newsletter.owner == request.user %}
+                {% if user.is_superuser or newsletter.owner == request.user or perms.services.delete_newsletter%}
                     <a type="button" href="{% url 'services:delete_newsletter' newsletter.pk %}" class="w-100 btn btn-lg btn-primary">Удалить</a>
                 {% endif %}
               </div>
             </div>
           </div>
+      {% endif %}
         </div>
     {% endfor %}
   </main>

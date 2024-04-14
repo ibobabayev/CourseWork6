@@ -88,14 +88,10 @@ class MessageDetailView(DetailView):
     model = Message
 
 
-class MessageDeleteView(LoginRequiredMixin,UserPassesTestMixin,DeleteView):
+class MessageDeleteView(LoginRequiredMixin,DeleteView):
     model = Message
     success_url = reverse_lazy('services:list_message')
     login_url = 'users:login'
-
-    def test_func(self):
-        return self.request.user.is_staff
-
 
 
 class NewsletterCreateView(LoginRequiredMixin,CreateView):
@@ -125,10 +121,11 @@ class NewsletterUpdateView(LoginRequiredMixin,UpdateView):
             raise Http404
 
 
-
-
-class NewsletterListView(ListView):
+class NewsletterListView(LoginRequiredMixin,ListView):
     model = Newsletter
+    success_url = reverse_lazy('services:list_newsletter')
+    login_url = 'users:login'
+    # permission_required = 'services.view_newsletter'
 
     def get_context_data(self, *args, **kwargs):
         context_data = super().get_context_data(*args, **kwargs)
@@ -147,13 +144,11 @@ class NewsletterDetailView(DetailView):
     model = Newsletter
 
 
-class NewsletterDeleteView(LoginRequiredMixin,UserPassesTestMixin,DeleteView):
+class NewsletterDeleteView(LoginRequiredMixin,DeleteView):
     model = Newsletter
     success_url = reverse_lazy('services:list_newsletter')
     login_url = 'users:login'
 
-    def test_func(self):
-        return self.request.user.is_staff
 
 class ContactTemplateView(TemplateView):
     template_name = 'services/contacts.html'

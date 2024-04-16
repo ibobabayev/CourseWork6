@@ -4,6 +4,7 @@ from django.db import models
 class User(AbstractUser):
     phone = models.CharField(max_length=20,verbose_name='номер телефона',null=True,blank=True)
     avatar = models.ImageField(upload_to='users/',verbose_name='аватар',null=True,blank=True)
+    token = models.CharField(verbose_name='Token',max_length=100,null=True,blank=True)
 
     username = None
     email = models.EmailField(unique=True, verbose_name='почта')

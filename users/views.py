@@ -38,7 +38,6 @@ def email_verification(request,token):
     new_user = get_object_or_404(User,token=token)
     new_user.is_active = True
     new_user.save()
-
     return redirect(reverse_lazy('users:login'))
 
 class UserUpdateView(LoginRequiredMixin,PermissionRequiredMixin,UpdateView):

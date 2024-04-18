@@ -34,9 +34,24 @@ class ClientUpdateView(LoginRequiredMixin,UpdateView):
     success_url = reverse_lazy('services:client_list')
     login_url = 'users:login'
 
+    def get_object(self, queryset=None):
+        self.object = super().get_object(queryset)
+        if self.object.owner == self.request.user or self.request.user.is_superuser:
+            return self.object
+        else:
+            raise Http404
 
-class ClientListView(ListView):
+class ClientListView(LoginRequiredMixin,ListView):
     model = Client
+    success_url = reverse_lazy('services:client_list')
+    login_url = 'users:login'
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        queryset = queryset.filter(id=self.kwargs.get('pk'))
+        if not self.request.user.is_staff:
+            queryset = queryset.filter(owner=self.request.user)
+        return queryset
 
     def get_context_data(self, *args, **kwargs):
         context_data = super().get_context_data(*args,**kwargs)
@@ -76,8 +91,10 @@ class MessageUpdateView(LoginRequiredMixin,UpdateView):
         if self.object.owner != self.request.user:
             raise Http404
         return self.object
-class MessageListView(ListView):
+class MessageListView(LoginRequiredMixin,ListView):
     model = Message
+    success_url = reverse_lazy('services:list_message')
+    login_url = 'users:login'
 
     def get_context_data(self, *args, **kwargs):
         context_data = super().get_context_data(*args, **kwargs)
@@ -143,6 +160,12 @@ class NewsletterListView(LoginRequiredMixin,ListView):
 class NewsletterDetailView(DetailView):
     model = Newsletter
 
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        queryset = queryset.filter(id=self.kwargs.get('pk'))
+        if not self.request.user.is_staff:
+            queryset = queryset.filter(owner=self.request.user)
+        return queryset
 
 class NewsletterDeleteView(LoginRequiredMixin,DeleteView):
     model = Newsletter

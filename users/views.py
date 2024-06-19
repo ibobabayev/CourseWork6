@@ -28,7 +28,7 @@ class RegisterView(CreateView):
         url = f'http://{host}/users/confirm/{token}'
         send_mail(
             subject="Подтверждение регистрации",
-            message=f'Перейдите по ссылке для подтверждение регистрации {url}!',
+            message=f'Перейдите по ссылке для подтверждение регистрации {url}',
             from_email = settings.EMAIL_HOST_USER,
             recipient_list= [new_user.email]
         )
